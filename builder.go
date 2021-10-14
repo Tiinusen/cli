@@ -59,7 +59,7 @@ func (b *Builder) Run(args ...string) (*Runner, error) {
 
 		b.postConfig(c)
 		if b.before != nil {
-			b.before(b.runner, b.runner.Args(), b.runner.Flags())
+			return b.before(b.runner, b.runner.Args(), b.runner.Flags())
 		}
 		return nil
 	}
