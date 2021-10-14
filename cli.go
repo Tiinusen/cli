@@ -26,7 +26,7 @@ func (writer logWriter) Write(bytes []byte) (int, error) {
 
 type Args []string
 
-type Callback func(c *Runner, args Args, flags Flags) error
+type Callback func(runner *Runner, args Args, flags Flags) error
 
 // BooleanFlag specifices a boolean flag variable input by provided name, usage and aliases
 func BooleanFlag(name string, usage string, aliases ...string) cli.Flag {

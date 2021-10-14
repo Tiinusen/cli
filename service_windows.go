@@ -47,7 +47,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		return b
 	}
 	b.daemoize = true
-	b.Command("install", "installs windows service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("install", "installs windows service", func(runner *Runner, args Args, flags Flags) error {
 		controlService(serviceName, svc.Stop, svc.Stopped) // In case service is started
 		exepath, err := exePath()
 		if err != nil {
@@ -80,7 +80,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("remove", "uninstalls windows service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("remove", "uninstalls windows service", func(runner *Runner, args Args, flags Flags) error {
 		controlService(serviceName, svc.Stop, svc.Stopped) // In case service is started
 		m, err := mgr.Connect()
 		if err != nil {
@@ -104,7 +104,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("start", "starts windows service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("start", "starts windows service", func(runner *Runner, args Args, flags Flags) error {
 		controlService(serviceName, svc.Stop, svc.Stopped) // In case service is already started
 		if err := startService(serviceName); err != nil {
 			return err
@@ -113,7 +113,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("stop", "stops windows service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("stop", "stops windows service", func(runner *Runner, args Args, flags Flags) error {
 		if err := controlService(serviceName, svc.Stop, svc.Stopped); err != nil {
 			return err
 		}
@@ -122,7 +122,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("pause", "pauses windows service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("pause", "pauses windows service", func(runner *Runner, args Args, flags Flags) error {
 		if err := controlService(serviceName, svc.Pause, svc.Paused); err != nil {
 			return err
 		}
@@ -130,7 +130,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("continue", "continues windows service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("continue", "continues windows service", func(runner *Runner, args Args, flags Flags) error {
 		if err := controlService(serviceName, svc.Continue, svc.Running); err != nil {
 			return err
 		}

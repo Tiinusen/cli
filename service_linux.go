@@ -179,7 +179,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		}
 		return nil
 	}
-	b.Command("install", "installs systemd service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("install", "installs systemd service", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to install this service")
 		}
@@ -207,7 +207,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("remove", "uninstalls systemd service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("remove", "uninstalls systemd service", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to remove this service")
 		}
@@ -224,7 +224,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("enable", "enables automatic start of systemd service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("enable", "enables automatic start of systemd service", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to enable this service")
 		}
@@ -238,7 +238,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("disable", "disables automatic start of systemd service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("disable", "disables automatic start of systemd service", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to disable this service")
 		}
@@ -252,7 +252,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("start", "starts systemd service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("start", "starts systemd service", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to start this service")
 		}
@@ -266,7 +266,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("stop", "stops systemd service", func(c *Runner, args Args, flags Flags) error {
+	b.Command("stop", "stops systemd service", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to stop this service")
 		}
@@ -283,7 +283,7 @@ func (b *Builder) Daemonize(serviceName string, serviceDescription string) *Buil
 		os.Exit(0)
 		return nil
 	})
-	b.Command("status", "checks systemd service status", func(c *Runner, args Args, flags Flags) error {
+	b.Command("status", "checks systemd service status", func(runner *Runner, args Args, flags Flags) error {
 		if os.Getuid() != 0 {
 			return fmt.Errorf("you need root priviledges to status this service")
 		}
